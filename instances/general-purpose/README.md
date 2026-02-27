@@ -1,50 +1,50 @@
-# ☁️ AWS EC2 — Instances à Usage Général
-### Cas concret : Plateforme E-Learning "LearnUp"
+# ☁️ AWS EC2 — General Purpose Instances
+### Concrete case: E-Learning Platform "LearnUp"
 
 ---
 
-## 📌 Contexte
+## 📌 Context
 
-**LearnUp** est une startup proposant des formations en ligne (vidéos, quiz, certificats).  
-Elle doit héberger son application sur AWS et choisir le bon type d'instance EC2.
+**LearnUp** is a startup offering online training (videos, quizzes, certificates).  
+She must host her application on AWS and choose the right EC2 instance type.
 
 ---
 
-## 🖥️ C'est quoi une instance EC2 ?
+## 🖥️ What is an EC2 instance?
 
-Une instance EC2, c'est **louer un ordinateur virtuel** dans les datacenters d'AWS.  
-Tu choisis sa puissance (CPU, RAM, réseau) et tu paies à l'usage.
+An EC2 instance is **renting a virtual computer** in the AWS datacenters.  
+You choose its power (CPU, RAM, network) and you pay by use.
 
 ```
 ┌──────────────────────────────────────────────────────┐
 │            Datacenter AWS (ex: eu-west-3 Paris)      │
 │                                                      │
-│  ┌───────────┐  ┌───────────┐  ┌───────────┐        │
-│  │  LearnUp  │  │  Client B │  │  Client C │  ...   │
-│  │(notre app)│  │           │  │           │        │
-│  └───────────┘  └───────────┘  └───────────┘        │
+│  ┌───────────┐  ┌───────────┐  ┌───────────┐         │
+│  │  LearnUp  │  │  Client B │  │  Client C │  ...    │
+│  │(our app)  │  │           │  │           │         │
+│  └───────────┘  └───────────┘  └───────────┘         │
 │                                                      │
-│         → Un seul serveur physique partagé           │
-│           mais chaque instance est isolée            │
+│         → Single shared physical server              │
+│           but each instance is isolated              │
 └──────────────────────────────────────────────────────┘
 ```
 
 ---
 
-## ⚖️ Pourquoi des instances À Usage Général ?
+## ⚖️ Why General Purpose Instances?
 
-Les instances à usage général offrent un **équilibre entre CPU, RAM et réseau**.  
-Elles sont parfaites quand aucune ressource ne domine les autres.
+General purpose instances offer a **balance between CPU, RAM and network**.  
+They are perfect when no resource dominates others.
 
 ```
-  Instance Calcul Optimisé    Instance À Usage Général    Instance Mémoire Optimisée
+Instance Optimized Compute    Instance General Purpose    Instance Optimized Memory Instance
   ┌──────────────────────┐    ┌──────────────────────┐    ┌──────────────────────┐
-  │ CPU  ████████████ ↑  │    │ CPU  ███████░░░ =    │    │ CPU  ████░░░░░░ ↓   │
-  │ RAM  ████░░░░░░ ↓    │    │ RAM  ███████░░░ =    │    │ RAM  ████████████ ↑ │
-  │ NET  ████░░░░░░ ↓    │    │ NET  ███████░░░ =    │    │ NET  ████████░░░ =  │
+  │ CPU  ████████████ ↑  │    │ CPU  ███████░░░ =    │    │ CPU  ████░░░░░░ ↓    │
+  │ RAM  ████░░░░░░ ↓    │    │ RAM  ███████░░░ =    │    │ RAM  ████████████ ↑  │
+  │ NET  ████░░░░░░ ↓    │    │ NET  ███████░░░ =    │    │ NET  ████████░░░ =   │
   │                      │    │                      │    │                      │
-  │ Ex: rendu vidéo,     │    │ Ex: site web, API,   │    │ Ex: base de données  │
-  │ machine learning     │    │ apps légères         │    │ volumineuse, cache   │
+  │ Ex: video rendering, │    │ Ex: website, API,    │    │ Ex: large            │
+  │ machine learning     │    │ light apps           │    │ database, cache      │
   └──────────────────────┘    └──────────────────────┘    └──────────────────────┘
 ```
 
@@ -54,12 +54,12 @@ Elles sont parfaites quand aucune ressource ne domine les autres.
 
 ```
                         ┌─────────────────────────┐
-                        │    Étudiants (internet)  │
+                        │    Students (internet)  │
                         └────────────┬────────────┘
                                      │
                                      ▼
                         ┌─────────────────────────┐
-                        │    Load Balancer AWS     │  ← Répartit le trafic
+                        │    Load Balancer AWS     │  ← distributes traffic
                         └────────────┬────────────┘
                                      │
                     ┌────────────────┴────────────────┐
@@ -68,87 +68,88 @@ Elles sont parfaites quand aucune ressource ne domine les autres.
        │  EC2 t3.medium #1   │           │  EC2 t3.medium #2   │
        │  (Usage Général)    │           │  (Usage Général)    │
        │                     │           │                     │
-       │ • Site web          │           │ • Site web          │
-       │ • API cours         │           │ • API cours         │
+       │ • Website           │           │ • Website           │
+       │ • API course        │           │ • API course        │
        │ • Authentification  │           │ • Authentification  │
        └─────────────────────┘           └─────────────────────┘
                     │                                 │
                     └────────────────┬────────────────┘
                                      │
                         ┌────────────▼────────────┐
-                        │   Base de données RDS   │  ← Gérée séparément
-                        │ (cours, users, progrès) │
+                        │   RDS database          │  ← Handled separately
+                        │    (course, users,      │
+                        │       progres)          │
                         └─────────────────────────┘
                                      │
                         ┌────────────▼────────────┐
-                        │     S3 (stockage)       │  ← Vidéos, PDFs, images
+                        │     S3 (storage)        │  ← Videos, PDFs, images
                         └─────────────────────────┘
 ```
 
 ---
 
-## 📊 Choix de l'instance — Justification Architecte
+## 📊 Instance Choice—Architect Justification
 
-| Critère | Analyse pour LearnUp |
+| Criterion | Analysis for LearnUp |
 |---|---|
-| **Charge CPU** | Modérée — rendu de pages, API REST, quiz |
-| **Charge RAM** | Modérée — sessions utilisateurs, cache cours |
-| **Réseau** | Modéré — les vidéos sont sur S3, pas sur EC2 |
-| **Conclusion** | ✅ Pas de besoin dominant → Usage Général parfait |
+| **CPU Load** | Moderate—page rendering, REST API, quiz |
+| **RAM load** | Moderate—user sessions, cache course |
+| **Network** | Moderate—videos are on S3, not on EC2 |
+| **Conclusion** | ✅ No dominant need Perfect General Use |
 
-### Famille T vs M — Quelle différence ?
+### Family T vs M—What’s the difference?
 
-| Instance | Usage | Coût (approx.) | Quand l'utiliser |
+| Instance | Usage | Cost (approx.) | When to use |
 |---|---|---|---|
-| `t3.micro` | Test / dev | ~$8/mois | Environnement de développement |
-| `t3.medium` | Production légère | ~$35/mois | LearnUp au lancement (<500 users/jour) |
-| `t3.large` | Production croissante | ~$65/mois | LearnUp en croissance (500-2000 users/jour) |
-| `m6i.large` | Production robuste | ~$90/mois | LearnUp établi (>2000 users/jour) |
+| `t3.micro` | Test / dev | ~$8/month | Development environment |
+| `t3.medium` | Light production | ~$35/month | LearnUp at launch (<500 users/day) |
+| `t3.large` | Increasing production | ~$65/month | growing LearnUp (500-2000 users/day) |
+| `m6i.large` | Robust production | ~$90/month | LearnUp established (>2000 users/day) |
 
-> 💡 **Décision d'architecte :** On démarre avec `t3.medium` et on monitore avec **CloudWatch**.  
-> Si le CPU dépasse 70% régulièrement → on scale vers `t3.large` ou `m6i.large`.
-
----
-
-## 🎯 Bénéfices des instances à Usage Général pour LearnUp
-
-**1. Flexibilité** — Un seul type d'instance gère le site, l'API et l'auth sans sur-spécialisation.
-
-**2. Coût maîtrisé** — On ne paie pas pour 128 Go de RAM alors qu'on n'en a besoin que de 4 Go.
-
-**3. Scalabilité simple** — En cas de pic (ex: rentrée scolaire), AWS Auto Scaling peut dupliquer les instances automatiquement.
-
-**4. Évolutivité** — On peut migrer de `t3.medium` vers `m6i.large` sans changer l'architecture.
+> 💡 **Architect’s decision :** We start with `t3.medium` and we monitor with **CloudWatch**.  
+> If the CPU regularly exceeds 70% on scale to `t3.large` or `m6i.large`.
 
 ---
 
-## 📈 Stratégie de montée en charge
+## 🎯 General Purpose Instance Benefits for LearnUp
 
-```
-Nb d'étudiants    Instance recommandée        Stratégie
+**1. Flexibility** — A single instance type manages the site, API, and auth without over-specialization.
+
+**2. Controlled cost** — You don’t pay for 128 GB of RAM when you only need 4 GB.
+
+**3. Simple scalability** — In case of a peak (e.g. start of the school year), AWS Auto Scaling can duplicate instances automatically.
+
+**4. Scalability** — One can migrate from `t3.medium` to `m6i.large` without changing the architecture.
+
+---
+
+## 📈 Scalability Strategy
+
+``>
+Number of students Recommended instance Strategy
 ─────────────────────────────────────────────────────────
-0 – 200/jour  →  t3.micro (dev/test)          1 instance
-200 – 500/j   →  t3.medium                    1 instance
-500 – 2000/j  →  t3.large                     2 instances + Load Balancer
-2000 – 5000/j →  m6i.large                    Auto Scaling Group (2-4 instances)
-5000+/j       →  m6i.xlarge                   Multi-AZ + Auto Scaling
-```
+0 – 200/day t3.micro (dev/test)   1 instance
+200 – 500/d t3.medium 1 instance
+500 – 2000/d t3.large 2 instances + Load Balancer
+2000 – 5000/j m6i.large Auto Scaling Group (2-4 instances)
+5000+/j m6i.xlarge Multi-AZ + Auto Scaling
+``>
 
 ---
 
-## 📂 Structure du projet
+## 📂 Project Structure
 
 ```
 aws-ec2-general-purpose/
-├── README.md          ← Ce fichier (documentation)
-├── main.tf            ← Infrastructure Terraform
+├── README.md          ← This file (documentation)
+├── main.tf            ← TerraformInfrastructure
 └── architecture/
-    └── learnup-architecture.png  ← (à ajouter avec draw.io)
+    └── learnup-architecture.png  ← (to be added with draw.io)
 ```
 
 ---
 
-## 🔗 Ressources utiles
+## 🔗 Useful Resources
 
 - [AWS EC2 Instance Types](https://aws.amazon.com/fr/ec2/instance-types/)
 - [Comparateur de prix EC2](https://instances.vantage.sh/)
@@ -156,4 +157,4 @@ aws-ec2-general-purpose/
 
 ---
 
-*Formation AWS Cloud Practitioner — Module 2 : Calcul dans le cloud*
+*Formation AWS Cloud Practitioner 

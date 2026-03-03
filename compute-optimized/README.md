@@ -1,9 +1,6 @@
 # ⚡ AWS EC2 — Compute Optimized Instances
 ### Real-world case: LearnUp E-Learning Platform — AI Exam Correction
 
-> 📚 Module 2 — Cloud Computing | AWS Cloud Practitioner Training  
-> 👩‍💻 Author: Cloud Architect in training
-
 ---
 
 ## 📌 Context
@@ -91,7 +88,6 @@ It's the right choice when your application needs to perform **complex, intensiv
 | **C7g** (ex: c7g.large) | ARM Graviton processor, best price/performance ratio |
 | **C6a** (ex: c6a.large) | AMD-based, great value for compute workloads |
 
-> 💡 The **C** stands for **C**ompute — easy to remember!
 
 ---
 
@@ -104,8 +100,6 @@ It's the right choice when your application needs to perform **complex, intensiv
 | **Cost** | ~$35/month | ~$75/month |
 | **Best for** | Website, API, auth | AI correction, heavy compute |
 | **Avoid when** | Intensive calculations | Storing large amounts of data |
-
-> 💡 Same RAM, but a much more powerful CPU — that is the key difference!
 
 ---
 

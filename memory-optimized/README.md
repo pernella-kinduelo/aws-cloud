@@ -163,11 +163,11 @@ course launches), data is already in memory and always ready to serve.
 
 ## 📂 Project Structure
 
-​| Folder | Status |
+​|Folder |Status |
 |--------|--------|
-| instances/general-purpose/ | Done |
-| instances/compute-optimized/ | Done |
-| instances/memory-optimized/ | Done |
+|instances/general-purpose/ |Done |
+|instances/compute-optimized/ |Done |
+|instances/memory-optimized/ |Done |
 
 ---
 

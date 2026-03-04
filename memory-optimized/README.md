@@ -36,20 +36,20 @@ large amounts of data as fast as possible**.
 
 ---
 
-## ⚡ Why RAM matters — The key concept
+## Why RAM matters — The key concept
 
 ​```
         Without memory optimized instance:
 
         App → reads hard drive → loads data → responds
-                  (slow ❌ — disk is 100x slower than RAM)
+                  (slow  — disk is 100x slower than RAM)
 
         ──────────────────────────────────────────────
 
         With memory optimized instance:
 
         App → reads RAM → responds instantly
-               (everything already in memory ✅)
+               (everything already in memory )
 ​```
 
 The more data you keep in RAM, the less you read from disk.
@@ -59,35 +59,33 @@ RAM is **100x faster** than even the fastest SSD.
 
 ## 🏗️ LearnUp Architecture — Full Picture
 
-​```
-        [1,247 active students on the platform]
-                          │
-                          ▼
-           ┌──────────────────────────┐
-           │   t3.medium              │
-           │   (General Purpose)      │
-           │                          │
-           │ • Website         ✅     │
-           │ • Course videos   ✅     │
-           │ • Authentication  ✅     │
-           └─────────────┬────────────┘
-                         │
-             ┌───────────┴────────────┐
-             │                        │
-             ▼                        ▼
-  ┌──────────────────┐    ┌────────────────────────┐
-  │  c6i.large       │    │  r6i.large             │
-  │ (Compute         │    │  (Memory Optimized) 🧠 │
-  │  Optimized)      │    │                        │
-  │                  │    │ • Student progress  ✅  │
-  │ • AI exam        │    │ • Quiz scores       ✅  │
-  │   correction ✅  │    │ • Live statistics   ✅  │
-  │                  │    │ • Data cache        ✅  │
-  └──────────────────┘    │                        │
-                          │ → All in RAM,           │
-                          │   responds in ms!       │
-                          └────────────────────────┘
-​```
+`````
+    [1,247 active students on the platform]
+                      |
+                      v
+       +──────────────────────────+
+       |   t3.medium              |
+       |   (General Purpose)      |
+       |                          |
+       | Website          [OK]    |
+       | Course videos    [OK]    |
+       | Authentication   [OK]    |
+       +────────────+─────────────+
+                    |
+          +---------+---------+
+          |                   |
+          v                   v
++──────────────────+  +────────────────────────+
+|  c6i.large       |  |  r6i.large             |
+| (Compute         |  |  (Memory Optimized)    |
+|  Optimized)      |  |                        |
+|                  |  | Student progress [OK]  |
+| AI exam          |  | Quiz scores      [OK]  |
+| correction [OK]  |  | Live statistics  [OK]  |
+|                  |  | Data cache       [OK]  |
++──────────────────+  | All in RAM - fast!     |
+                      +────────────────────────+
+`````
 
 ---
 
@@ -117,19 +115,19 @@ RAM is **100x faster** than even the fastest SSD.
 
 ---
 
-## ✅ Typical Use Cases
+## Typical Use Cases
 
 ​```
-Real-time dashboard                → ✅ Memory Optimized
-Large relational database          → ✅ Memory Optimized
-In-memory cache (Redis, Memcached) → ✅ Memory Optimized
-Big data analytics                 → ✅ Memory Optimized
-Recommendation engine              → ✅ Memory Optimized
-SAP / large enterprise apps        → ✅ Memory Optimized
+Real-time dashboard                → Memory Optimized
+Large relational database          → Memory Optimized
+In-memory cache (Redis, Memcached) → Memory Optimized
+Big data analytics                 → Memory Optimized
+Recommendation engine              → Memory Optimized
+SAP / large enterprise apps        → Memory Optimized
 
-Simple website / blog              → ❌ Overkill, use General Purpose
-AI correction / heavy compute      → ❌ Use Compute Optimized instead
-File storage                       → ❌ Wrong choice, use S3
+Simple website / blog              → Overkill, use General Purpose
+AI correction / heavy compute      → Use Compute Optimized instead
+File storage                       → Wrong choice, use S3
 ​```
 
 ---

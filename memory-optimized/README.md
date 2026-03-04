@@ -117,18 +117,18 @@ RAM is **100x faster** than even the fastest SSD.
 
 ## Typical Use Cases
 
-​```
-Real-time dashboard                → Memory Optimized
-Large relational database          → Memory Optimized
-In-memory cache (Redis, Memcached) → Memory Optimized
-Big data analytics                 → Memory Optimized
-Recommendation engine              → Memory Optimized
-SAP / large enterprise apps        → Memory Optimized
+​**Good fit:**
+- Real-time dashboard
+- Large relational database
+- In-memory cache (Redis, Memcached)
+- Big data analytics
+- Recommendation engine
+- SAP / large enterprise apps
 
-Simple website / blog              → Overkill, use General Purpose
-AI correction / heavy compute      → Use Compute Optimized instead
-File storage                       → Wrong choice, use S3
-​```
+**Not a good fit:**
+- Simple website or blog → use General Purpose instead
+- AI correction / heavy compute → use Compute Optimized instead
+- File storage → use S3 instead
 
 ---
 
@@ -150,14 +150,12 @@ course launches), data is already in memory and always ready to serve.
 
 ## 📈 Scaling Strategy
 
-​```
-Active students        Recommended instance       Strategy
-──────────────────────────────────────────────────────────
-0    – 500  students → r6i.large    (16 GB RAM)  Single instance
-500  – 2000 students → r6i.xlarge  (32 GB RAM)  Vertical scaling
-2000 – 5000 students → r6i.2xlarge (64 GB RAM)  Vertical scaling
-5000+ students       → r6i.4xlarge + ElastiCache Horizontal + managed cache
-​```
+| Active students | Recommended instance | Strategy |
+|---|---|---|
+| 0 – 500 | r6i.large (16 GB RAM) | Single instance |
+| 500 – 2000 | r6i.xlarge (32 GB RAM) | Vertical scaling |
+| 2000 – 5000 | r6i.2xlarge (64 GB RAM) | Vertical scaling |
+| 5000+ | r6i.4xlarge + ElastiCache | Horizontal + managed cache |
 
 > 💡 **Architect tip:** For very large scale, consider moving the caching layer
 > to **Amazon ElastiCache** (AWS managed Redis). It's purpose-built for
@@ -167,19 +165,11 @@ Active students        Recommended instance       Strategy
 
 ## 📂 Project Structure
 
-​```
-aws-cloud/
-└── instances/
-    ├── general-purpose/               ← Done
-    │   ├── README.md
-    │   └── main.tf
-    ├── compute-optimized/             ← Done
-    │   ├── README.md
-    │   └── main.tf
-    └── memory-optimized/              ← You are here
-        ├── README.md
-        └── main.tf
-​```
+​| Folder | Status |
+|--------|--------|
+| instances/general-purpose/ | Done |
+| instances/compute-optimized/ | Done |
+| instances/memory-optimized/ | Done |
 
 ---
 

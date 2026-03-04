@@ -163,16 +163,17 @@ course launches), data is already in memory and always ready to serve.
 
 ## 📂 Project Structure
 
-​```
-aws-cloud/
-└── instances/
-    ├── general-purpose/               ← Done
-    │   ├── README.md
-    │   └── main.tf
-    └── compute-optimized/             ← You are here
-        ├── README.md
-        └── main.tf
-```
+    aws-cloud/
+    └── instances/
+        ├── general-purpose/        <- Done
+        │   ├── README.md
+        │   └── main.tf
+        ├── compute-optimized/      <- Done
+        │   ├── README.md
+        │   └── main.tf
+        └── memory-optimized/       <- You are here
+            ├── README.md
+            └── main.tf
 
 ---
 

@@ -161,8 +161,6 @@ course launches), data is already in memory and always ready to serve.
 > to **Amazon ElastiCache** (AWS managed Redis). It's purpose-built for
 > in-memory workloads and scales independently from your EC2 instances.
 
----
-
 ## 📂 Project Structure
 
 ​| Folder | Status |

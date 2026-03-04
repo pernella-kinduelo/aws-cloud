@@ -163,11 +163,16 @@ course launches), data is already in memory and always ready to serve.
 
 ## 📂 Project Structure
 
-​|Folder |Status |
-|--------|--------|
-|instances/general-purpose/ |Done |
-|instances/compute-optimized/ |Done |
-|instances/memory-optimized/ |Done |
+​```
+aws-cloud/
+└── instances/
+    ├── general-purpose/               ← Done
+    │   ├── README.md
+    │   └── main.tf
+    └── compute-optimized/             ← You are here
+        ├── README.md
+        └── main.tf
+```
 
 ---
 

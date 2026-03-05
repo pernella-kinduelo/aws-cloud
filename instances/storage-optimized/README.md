@@ -116,30 +116,28 @@ LearnUp generates this every single day:
     +---------------------------+
     |   t3.medium               |
     |   (General Purpose)       |
-    |  Website, API, Auth  [OK] |
-    +----------+----------------+
-               |
-    +----------+----------+----------+
-    |           |                    |
-    v           v                    v
-+----------+ +----------+  +----------------------+
-| c6i.large| |r6i.large |  | i4i.xlarge           |
-| (Compute | |(Memory   |  | (Storage Optimized)  |
-| Optimized| |Optimized)|  |                      |
-| AI exams | |Stats [OK]|  | Event logs      [OK] |
-| [OK]     | |          |  | Real-time analytics  |
-+----------+ +----------+  | Fast queries    [OK] |
-                           | Backup to S3    [OK] |
-    [Background]           +----------------------+
-          |
-          v
-    +--------------+
-    | g5.xlarge    |
-    |(Accelerated  |
-    | Computing)   |
-    | AI training  |
-    | [OK]         |
-    +--------------+
+    |   Website, API, Auth [OK] |
+    +---------------------------+
+                |
+        +-------+-------+
+        |               |
+        v               v
+    +----------+   +----------+
+    | c6i.large|   | r6i.large|
+    | (Compute |   | (Memory  |
+    | Optimized|   | Optimized|
+    | AI exams |   | Stats    |
+    | [OK]     |   | [OK]     |
+    +----------+   +----------+
+        |               |
+        v               v
+    +----------+   +----------------------+
+    | g5.xlarge|   | i4i.xlarge           |
+    |(Accelerat|   | (Storage Optimized)  |
+    | ed Comp.)|   | Event logs      [OK] |
+    | AI train |   | Real-time       [OK] |
+    | [OK]     |   | Backup to S3    [OK] |
+    +----------+   +----------------------+
 
 ---
 
